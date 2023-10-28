@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!DOCTYPE html>
+    <html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AutoBotMX Liverpool</title>
+        <link rel="stylesheet" href="styles.css">
+        <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    </head>
+    
+    <body>
+        <div class="navbar">
+            <a href="https://www.liverpool.com.mx/tienda/home.jsp">Liverpool</a>
+            <a href="#info">Info</a>
+            <a href="#otros">Otros enlaces</a>
+        </div>
+    
+        <div class="chat-container">
+            <div class="chat-header">
+                <img src="images/logo_bot.png" alt="Logo" class="logo">
+            </div>
+            <div class="chat-area" id="chatArea">
+                <!-- Los mensajes del chat irán aquí -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Escribe tu pregunta aquí...">
+                <button id="sendBtn"><img src="https://cdn.icon-icons.com/icons2/2770/PNG/512/send_icon_176694.png" alt="Enviar" width="23" style="vertical-align: middle;"></button>
+                <button id="imageBtn"><img src="https://cdn-icons-png.flaticon.com/512/4194/4194362.png" alt="Subir imagen" width="23" style="vertical-align: middle;"></button>
+                <input type="file" id="imageInput" accept="image/*" style="display:none;">
+            </div>
+        </div>
+    
+        <div>
+            <button id="car1" type="button">Tang ev</button>
+            <button id="car2" type="button">Han ev</button>
+            <button id="car3" type="button">Yuan plus ev</button>
+            <button id="returnButton" type = "button"> Return </button>
+            <p id="header"></p>
+
+            
+        </div>
+
+        <button class="schedule-btn">Agendar cita</button>
+    
+        <!-- Formulario de cita -->
+        <div class="form-container hidden">
+            <h2>Agendar una cita</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="cel">Celular:</label>
+                    <input type="tel" id="cel" required>
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha deseada:</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    
+        <div id="binaryDiv" class="footer-binary">
+            <span class="binary-text">01001110 01000010</span>
+            <span class="normal-text" style="display: none;">Hecho por Navegantes Binarios</span>
+        </div>
+    
+        <div class="typing-animation" style="display: none;"></div>
+    
+        <div class="modal" id="imageModal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <h2>Subir imagen</h2>
+                <p>Por favor, carga tu imagen y proporciona una descripción detallada.</p>
+                <input type="file" id="modalImageInput" accept="image/*">
+                <textarea id="imageDescription" placeholder="Añade una descripción detallada aquí..."></textarea>
+                <button id="uploadImageBtn">Subir</button>
+            </div>
+        </div>
+
+
+        <script src="script.js"></script>
+        <script>
+            const binaryDiv = document.getElementById('binaryDiv');
+            const binaryText = binaryDiv.querySelector('.binary-text');
+            const normalText = binaryDiv.querySelector('.normal-text');
+    
+            binaryDiv.addEventListener('mouseover', () => {
+                binaryText.style.display = 'none';
+                normalText.style.display = 'inline';
+            });
+    
+            binaryDiv.addEventListener('mouseout', () => {
+                binaryText.style.display = 'inline';
+                normalText.style.display = 'none';
+            });
+    
+            // Inicializar EmailJS
+            emailjs.init("QGSc5jsPsYfsiYScA");
+    
+            document.getElementById('contact-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+    
+                const template_params = {
+                    "to_name": "Administrador",
+                    "from_name": "AutoBotMX",
+                    "message": `Nombre: ${document.getElementById('nombre').value}, Email: ${document.getElementById('email').value}, Celular: ${document.getElementById('cel').value}, Fecha deseada: ${document.getElementById('fecha').value}`
+                }
+    
+                template_params.to_email = 'vicentito987@gmail.com'; 
+    
+                emailjs.send("service_w6lwqo2", "template_1thethc", template_params)
+                    .then(function (response) {
+                        console.log('Correo enviado exitosamente!', response.status, response.text);
+                    }, function (error) {
+                        console.log('Error al enviar correo:', error);
+                    });
+    
+                document.getElementById('contact-form').reset();
+            });
+        </script>
+    </body>
+    
+    </html>
+    
