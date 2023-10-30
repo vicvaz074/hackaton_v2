@@ -1,32 +1,21 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const OpenAI = require('openai');
 const axios = require('axios');
+const OpenAI = require('openai');
 
-const app = express();
-
-app.use(cors());
-app.use(bodyParser.json());
-
-const OPENAI_API_KEY = "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"; // Tu clave API
+const OPENAI_API_KEY = "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";
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-// Aquí es donde mantenemos la lógica de la ruta /ask
-app.post('/ask', async (req, res) => {
+module.exports = async (req, res) => {
     const userQuestion = req.body.question.toLowerCase();
     let selectedCar = req.body.selectedCar;
     console.log(`Question ${selectedCar}`);
 
     let sourceId;
 
-    if (selectedCar === "Car1"){ // Tang EV
+    if (selectedCar === "Car1") {
         sourceId = "cha_wua3hbptWhvhMN3W1Sfgj";
-    }
-    else if (selectedCar === "Car2"){ // Han EV
+    } else if (selectedCar === "Car2") {
         sourceId = "cha_o1nrlSars2ax4LYBd9a5f";
-    }
-    else if (selectedCar === "Car3"){ // Yuan Plus EV
+    } else if (selectedCar === "Car3") {
         sourceId = "cha_3Re6lgmJs4dmpGdvLDU8P";
     }
 
@@ -53,9 +42,6 @@ app.post('/ask', async (req, res) => {
     }
 
     try {
-        const userQuestion = req.body.question;
-        console.log("Pregunta recibida:", userQuestion);
-
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
@@ -66,8 +52,6 @@ app.post('/ask', async (req, res) => {
                 { role: "user", content: userQuestion }
             ]
         });
-
-        console.log("Respuesta completa de OpenAI:", completion);
 
         if (completion && completion.choices && completion.choices.length > 0) {
             const responseText = completion.choices[0].message.content;
@@ -80,6 +64,4 @@ app.post('/ask', async (req, res) => {
         console.error("Error al procesar la pregunta:", error);
         res.status(500).json({ error: "Error al procesar la pregunta." });
     }
-});
-
-module.exports = app;
+};
