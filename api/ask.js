@@ -1,7 +1,7 @@
 const axios = require('axios');
 const OpenAI = require('openai');
 
-const OPENAI_API_KEY = "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";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 module.exports = async (req, res) => {
