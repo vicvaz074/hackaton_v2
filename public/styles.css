@@ -44,6 +44,8 @@ body {
 }
 
 .chat-header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     background-color: #e2049a;
     color: white;
     padding: 20px;
@@ -212,8 +214,6 @@ button:hover {
     margin-top: 10px;
 }
 
-
-
 .modal {
     display: none;
     position: fixed;
@@ -262,4 +262,42 @@ textarea {
     margin: 8px 0;
     box-sizing: border-box;
     resize: none;
+}
+
+@media screen and (max-width: 768px) {
+    .chat-container {
+        width: 95%; 
+        margin-top: 100px; 
+    }
+    
+    .modal-content {
+        width: 80%; 
+    }
+
+    .navbar a {
+        padding: 12px; 
+        font-size: 15px; 
+    }
+
+    /* Reglas adicionales para los botones */
+    #sendBtn img, #imageBtn img {
+        width: 18px;  /* Reducción del tamaño de la imagen */
+    }
+
+    button {
+        margin-right: 3px;  /* Ajuste del margen */
+        padding: 8px 12px;  /* Ajuste del padding */
+    }
+    
+    @media screen and (max-width: 480px) {
+        .navbar a {
+            font-size: 13px; 
+        }
+    }
+}
+
+.car-button {
+    display: flex;
+    justify-content: center;
+    margin-top: -60px;
 }
