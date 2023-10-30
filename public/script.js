@@ -1,4 +1,4 @@
-const BASE_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "https://hackaton-2023.vercel.app";
+const BASE_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "https://hackaton-v2.vercel.app";
 
 const chatArea = document.getElementById('chatArea');
 const userInput = document.getElementById('userInput');
