@@ -1,3 +1,5 @@
+const BASE_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "https://hackaton-2023.vercel.app";
+
 const chatArea = document.getElementById('chatArea');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
@@ -89,7 +91,7 @@ sendBtn.addEventListener('click', async function() {
         chatArea.appendChild(typingAnimation);
         
         try {
-            const response = await fetch('http://localhost:3000/ask', {
+            const response = await fetch(`${BASE_URL}/api/ask`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -198,7 +200,7 @@ uploadImageBtn.addEventListener('click', async () => {
         chatArea.appendChild(typingAnimation);
         
         try {
-            const response = await fetch('http://localhost:3000/ask', {
+            const response = await fetch(`${BASE_URL}/api/ask`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
