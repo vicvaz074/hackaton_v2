@@ -99,6 +99,10 @@ sendBtn.addEventListener('click', async function() {
                 body: JSON.stringify({ question: message, selectedCar: selectedCar })
             });
 
+            if (!response.ok) {
+                throw new Error("Error en la respuesta del servidor");
+            }
+
             const data = await response.json();
             displayBotMessage(data.response);
         } catch (error) {
@@ -110,6 +114,7 @@ sendBtn.addEventListener('click', async function() {
     
     userInput.value = '';
 });
+
 
 function showForm() {
     if (scheduleForm.classList.contains('hidden')) {
